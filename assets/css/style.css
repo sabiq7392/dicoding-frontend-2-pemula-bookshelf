@@ -12,22 +12,27 @@ html {
 }
 
 body {
-  background: #1b262c;
+  background: #f5f5f5;
+}
+
+h2 {
+  font-size: 36px;
 }
 
 input, button {
-  border: none !important;
+  border-radius: 5px;
+  border: 1px solid rgba(27, 38, 44, 0.2);
   font-size: 16px;
-  background: #3282b8;
-  color: #f8f8f8;
+  background: #fff;
+  color: #1B262C;
 }
 
 input:focus {
-  outline: 1px solid #f8f8f8;
+  outline: 1px solid #F0D9DA;
 }
 
 .head_bar {
-  padding: 12px;
+  padding: 9px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -37,21 +42,16 @@ input:focus {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #0f4c75;
-  color: #f8f8f8;
+  background-color: white;
+  -webkit-filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.1));
+          filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.1));
 }
 
 main {
-  max-width: 1200px;
+  max-width: 960px;
   width: 100%;
   margin: 60px auto;
   padding: 16px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
 .input_section {
@@ -63,14 +63,13 @@ main {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 16px;
-  background: #0f4c75;
   border-radius: 5px;
   margin-right: 60px;
 }
 
 .input_section h2 {
   text-align: center;
-  color: #f8f8f8;
+  color: #1B262C;
   margin-bottom: 30px;
 }
 
@@ -79,8 +78,8 @@ main {
 }
 
 .input_section form button {
-  background-color: #3282b8;
-  color: #f8f8f8;
+  background-color: #fff;
+  color: #1B262C;
   border: 0;
   border-radius: 5px;
   display: block;
@@ -94,7 +93,7 @@ main {
 }
 
 .input_section form .input label {
-  color: #f8f8f8;
+  color: #1B262C;
   font-weight: bold;
 }
 
@@ -116,7 +115,7 @@ main {
 }
 
 .input_section form .input_inline label {
-  color: #f8f8f8;
+  color: #1B262C;
   font-weight: bold;
   margin-right: 10px;
 }
@@ -133,12 +132,11 @@ main {
       -ms-flex-align: center;
           align-items: center;
   padding: 16px;
-  background: #0f4c75;
   border-radius: 5px;
 }
 
 .search_section h2 {
-  color: #f8f8f8;
+  color: #1B262C;
 }
 
 .search_section form {
@@ -146,9 +144,13 @@ main {
   width: 100%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 1fr 0.5fr;
-      grid-template-columns: auto 1fr 0.5fr;
-  grid-gap: 10px;
+  -ms-grid-columns: auto 1fr 40px;
+      grid-template-columns: auto 1fr 40px;
+  grid-gap: 5px;
+}
+
+.search_section form label, .search_section form button {
+  color: #1B262C;
 }
 
 .search_section form label {
@@ -158,31 +160,42 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #f8f8f8;
+  font-weight: bold;
+}
+
+.search_section form input, .search_section form button {
+  -webkit-filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+          filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
 }
 
 .search_section form input {
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px;
 }
 
 .search_section form button {
-  background-color: #3282b8;
-  color: #f8f8f8;
-  border: 0;
-  border-radius: 5px;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  background-color: #F0D9DA;
   cursor: pointer;
 }
 
 .book_shelf {
   margin: 16px 0 0 0;
-  background: #0f4c75;
   padding: 16px;
   border-radius: 5px;
 }
 
 .book_shelf h2 {
-  color: #f8f8f8;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-columns: 32px auto;
+      grid-template-columns: 32px auto;
+  grid-gap: 10px;
+  color: #1B262C;
 }
 
 .book_shelf .book_list {
@@ -198,7 +211,7 @@ main {
 
 .book_shelf .book_list .book_item h3, .book_shelf .book_list .book_item p {
   margin: 8px 0;
-  color: #f8f8f8;
+  color: #1B262C;
 }
 
 .book_shelf .book_list .book_item .action button {

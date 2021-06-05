@@ -9,68 +9,77 @@
 </head>
 <body>
 <header class="head_bar">
-    <h1 class="head_bar__title">Bookshelf Apps</h1>
+    <a href=""><img src="assets/img/Logo.svg" alt="Logo"></a>
 </header>
 <main>
-    <div class="left-layout">
-        <section class="input_section">
-            <h2>Input New Book</h2>
-            <form id="inputBook" action="#">
-                <div class="input">
-                    <label for="inputBookTitle">Title</label>
-                    <input id="inputBookTitle" type="text" required>
-                </div>
-                <div class="input">
-                    <label for="inputBookAuthor">Author</label>
-                    <input id="inputBookAuthor" type="text" required>
-                </div>
-                <div class="input">
-                    <label for="inputBookYear">Year</label>
-                    <input id="inputBookYear" type="number" required>
-                </div>
-                <div class="input_inline">
-                    <label for="inputBookIsComplete">Finished read</label>
-                    <input id="inputBookIsComplete" type="checkbox">
-                </div>
-                <button id="bookSubmit" type="submit">put the book on the <span id="finish-unfinished">shelf unfinished</span></button>
-            </form>
-        </section>
-    </div>
+    <section class="search_section">
+        <form id="searchBook" action="#">
+            <label for="searchBookTitle">Search:</label>
+            <input id="searchBookTitle" type="text" placeholder="Search Book Title...">
+            <button id="searchSubmit" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </form>
+    </section>
     
-    <div class="right-layout">
-        <section class="search_section">
-            <h2>Find Book (Opsional)</h2>
-            <form id="searchBook" action="#">
-                <label for="searchBookTitle">Title</label>
-                <input id="searchBookTitle" type="text">
-                <button id="searchSubmit" type="submit">Cari</button>
-            </form>
-        </section>
-    
-        <section class="book_shelf">
-            <h2>Unfinished Reading</h2>
-    
-            <div id="incompleteBookshelfList" class="book_list">
+    <section class="book_shelf">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FF6E74" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg> 
+            <span>Unfinished Reading</span>
+        </h2>
+
+        <div id="incompleteBookshelfList" class="book_list">
+        </div>
+    </section>
+    <section class="book_shelf">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#199D5E" class="bi bi-check-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+            </svg>
+            <span>Finished Reading</span> 
+        </h2>
+
+        <div id="completeBookshelfList" class="book_list">
+            <!--            <article class="book_item">-->
+            <!--                <h3>Book Title</h3>-->
+            <!--                <p>Penulis: John Doe</p>-->
+            <!--                <p>Tahun: 2002</p>-->
+
+            <!--                <div class="action">-->
+            <!--                    <button class="green">Belum selesai di Baca</button>-->
+            <!--                    <button class="red">Hapus buku</button>-->
+            <!--                </div>-->
+            <!--            </article>-->
+        </div>
+    </section>  
+    <section class="input_section">
+        <h2>Add New Book</h2>
+        <form id="inputBook" action="#">
+            <div class="input">
+                <label for="inputBookTitle">Title</label>
+                <input id="inputBookTitle" type="text" required>
             </div>
-        </section>
-    
-        <section class="book_shelf">
-            <h2>Finished Reading</h2>
-    
-            <div id="completeBookshelfList" class="book_list">
-                <!--            <article class="book_item">-->
-                <!--                <h3>Book Title</h3>-->
-                <!--                <p>Penulis: John Doe</p>-->
-                <!--                <p>Tahun: 2002</p>-->
-    
-                <!--                <div class="action">-->
-                <!--                    <button class="green">Belum selesai di Baca</button>-->
-                <!--                    <button class="red">Hapus buku</button>-->
-                <!--                </div>-->
-                <!--            </article>-->
+            <div class="input">
+                <label for="inputBookAuthor">Author</label>
+                <input id="inputBookAuthor" type="text" required>
             </div>
-        </section>
-    </div>
+            <div class="input">
+                <label for="inputBookYear">Year</label>
+                <input id="inputBookYear" type="number" required>
+            </div>
+            <div class="input_inline">
+                <label for="inputBookIsComplete">Finished read</label>
+                <input id="inputBookIsComplete" type="checkbox">
+            </div>    
+            <button id="bookSubmit" type="submit">put the book on the <span id="finish-unfinished">shelf unfinished</span></button>
+        </form>
+    </section>  
 </main>
 
 <p id="demo">Debugging</p>
