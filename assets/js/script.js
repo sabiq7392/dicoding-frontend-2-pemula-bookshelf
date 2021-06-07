@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     document.getElementById("inputBookIsComplete").checked = false;
+    document.getElementById("inputImportant").checked = true;
     
     const formInputBook = document.getElementById("inputBook");
-    const formSearchBook = document.getElementById("searchBook");
     formInputBook.addEventListener("submit", (event) => {
         event.preventDefault();
         makeBook();
     });
 
-    formSearchBook.addEventListener("submit", (event) => {
-        event.preventDefault();
-    });
+
 });

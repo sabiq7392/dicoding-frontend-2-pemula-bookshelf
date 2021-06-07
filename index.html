@@ -9,21 +9,22 @@
 </head>
 <body>
 <header class="head_bar">
-    <a href=""><img src="assets/img/Logo.svg" alt="Logo"></a>
+    <div class="container">
+        <a href="index.html"><img src="assets/img/Logo.svg" alt="Logo"></a>
+        <section class="search_section" id="searchSection">
+            <form id="searchBook" action="#">
+                <label for="searchBookTitle">Search:</label>
+                <input id="searchBookTitle" type="text" placeholder="Search Book Title...">
+                <button id="searchSubmit" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </section>
+    </div>
 </header>
 <main>
-    <section class="search_section">
-        <form id="searchBook" action="#">
-            <label for="searchBookTitle">Search:</label>
-            <input id="searchBookTitle" type="text" placeholder="Search Book Title...">
-            <button id="searchSubmit" type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </button>
-        </form>
-    </section>
-    
     <section class="book_shelf">
         <h2>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FF6E74" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
@@ -32,8 +33,22 @@
             </svg> 
             <span>Unfinished Reading</span>
         </h2>
-
+        <ul id="unfinishedLink" class="unfinished_link">
+            <li><a href="" class="active">Important!</a></li>
+            <li><a href="">Middle Priority</a></li>
+            <li><a href="">Low Priority</a></li>
+        </ul>
         <div id="incompleteBookshelfList" class="book_list">
+            <!-- <article class="book_item">
+                <h3>Book Title</h3>
+                <p>Penulis: John Doe</p>
+                <p>Tahun: 2002</p>
+
+                <div class="action">
+                    <button class="green">Finished</button>
+                    <button class="red">Delete</button>
+                </div>
+            </article> -->
         </div>
     </section>
     <section class="book_shelf">
@@ -44,7 +59,6 @@
             </svg>
             <span>Finished Reading</span> 
         </h2>
-
         <div id="completeBookshelfList" class="book_list">
             <!--            <article class="book_item">-->
             <!--                <h3>Book Title</h3>-->
@@ -53,48 +67,87 @@
 
             <!--                <div class="action">-->
             <!--                    <button class="green">Belum selesai di Baca</button>-->
-            <!--                    <button class="red">Hapus buku</button>-->
+            <!--                    <button class="red">Delete</button>-->
             <!--                </div>-->
             <!--            </article>-->
         </div>
     </section>  
-    <section class="input_section">
-        <h2>Add New Book</h2>
-        <form id="inputBook" action="#">
-            <div class="input">
-                <label for="inputBookTitle">Title</label>
-                <input id="inputBookTitle" type="text" required>
-            </div>
-            <div class="input">
-                <label for="inputBookAuthor">Author</label>
-                <input id="inputBookAuthor" type="text" required>
-            </div>
-            <div class="input">
-                <label for="inputBookYear">Year</label>
-                <input id="inputBookYear" type="number" required>
-            </div>
-            <div class="input_inline">
-                <label for="inputBookIsComplete">Finished read</label>
-                <input id="inputBookIsComplete" type="checkbox">
-            </div>    
-            <button id="bookSubmit" type="submit">put the book on the <span id="finish-unfinished">shelf unfinished</span></button>
-        </form>
-    </section>  
-</main>
+    <div id="overlay" class="overlay d-none">
+        <section class="input_section" id="inputSection">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#08D9D6" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                <span>Add New Book</span>
+            </h2>
+            <form id="inputBook" action="#">
+                <div class="input">
+                    <label for="inputBookTitle">Title</label>
+                    <input id="inputBookTitle" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="inputBookAuthor">Author</label>
+                    <input id="inputBookAuthor" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="inputBookYear">Year</label>
+                    <input id="inputBookYear" type="number" required>
+                </div>
+                <div class="input_priority input_inline">
+                    <h3>Choose Priority:</h3>
+                    <div class="input_priority_wrapper">
+                        <div>
+                            <label for="inputImportant">Important</label>
+                            <input id="inputImportant" name="inputPriority" type="radio">
+                        </div>
+                        <div>
+                            <label for="inputMiddlePriority">Middle</label>
+                            <input id="inputMiddlePriority" name="inputPriority" type="radio">
+                        </div>
+                        <div>
+                            <label for="inputLowPriority">Low</label>
+                            <input id="inputLowPriority" name="inputPriority" type="radio">
+                        </div>
+                    </div>
+                </div>  
+                <div class="input_inline">
+                    <label for="inputBookIsComplete"><i class="bi bi-question-circle"></i> Finished</label>
+                    <input id="inputBookIsComplete" type="checkbox">
+                </div>  
 
+                
+                <button id="bookSubmit" type="submit">Put on the <span id="textButtonFinish-unfinished">shelf unfinished</span></button>
+            </form>
+        </section>  
+    </div>
+    <aside>
+        <div class="add_book" id="asideAddBook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="" height="20" fill="#1B262C" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+            </svg>
+            <span>Add New Book</span>
+        </div>
+    </aside>
+</main>
 <p id="demo">Debugging</p>
+
+<footer>
+    <div class="container">
+        <small>Made By Sabiq Mame</small>
+        <ul>
+            <li><a href="https://www.instagram.com/ssabiqmame/"><i class="bi bi-instagram"></i></a></li>
+            <li><a href="https://github.com/sabiq7392"><i class="bi bi-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/sabiq-muhammad-6b314a210/"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+    </div>
+</footer>
+
     <script src="assets/js/data.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/makeBook.js"></script>
+    <script src="assets/js/aside.js"></script>
+    <script src="assets/js/searchButton.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
-<!-- <article class="book_item">
-                <h3>Book Title</h3>
-                <p>Penulis: John Doe</p>
-                <p>Tahun: 2002</p>
-
-                <div class="action">
-                    <button class="green">Selesai dibaca</button>
-                    <button class="red">Hapus buku</button>
-                </div>
-            </article> -->
+            
