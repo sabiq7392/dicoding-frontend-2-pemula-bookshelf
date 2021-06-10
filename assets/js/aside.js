@@ -1,4 +1,3 @@
-
 const inputSection = document.getElementById("inputSection");
 const overlay = document.getElementById("overlay");
 

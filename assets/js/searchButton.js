@@ -1,4 +1,3 @@
-
 document.getElementById("searchBook").addEventListener("submit", (event) => {
     event.preventDefault();
     

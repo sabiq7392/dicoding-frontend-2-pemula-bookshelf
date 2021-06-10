@@ -3,16 +3,20 @@ $font: #1B262C
 $font-white: #f5f5f5
 $input: #fff
 $primary-color: #F0D9DA
+$very-light: #08D9D6
 $border: 1px solid rgba(#1B262C, 0.1)
 $shadow-center: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1))
 $shadow-bottom: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15))
 $gap-1: 5px
 $gap-2: 10px
 $border-radius: 5px
+$border-circle: 100%
 $debug: 1px solid red
 $transition-fast: 0.2s
 $background-transparent: rgba(0,0,0,0)
 $brightness: brightness(90%)
+$disabled-0: 0!important
+$disabled-none: none!important
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css")
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap')
@@ -37,18 +41,21 @@ h2
     color: $font
 
 input, button
-    border-radius: $border-radius
+    border-top-left-radius: $border-radius
+    border-top-right-radius: $border-radius
+    border-bottom-left-radius: $border-radius
+    border-bottom-right-radius: $border-radius
     border: $border
     font-size: 16px
     color: $font
 
 input:focus 
-    outline: 1px solid $primary-color
-    filter: none!important
+    outline: 1px solid $very-light
+    filter: $shadow-center
 
 .head_bar 
     background-color: white
-    filter: $shadow-bottom
+    filter: $shadow-center
     position: sticky
     top: 0
     z-index: 1
@@ -67,6 +74,7 @@ input:focus
     align-items: center
     // padding: 16px
     border-radius: $border-radius
+
     h2 
         color: $font
     
@@ -74,8 +82,7 @@ input:focus
         padding: 16px
         width: 100%
         display: grid
-        grid-template-columns: auto 1fr 40px
-        grid-gap: $gap-1
+        grid-template-columns: auto auto
         
         label, button
             color: $font
@@ -87,12 +94,19 @@ input:focus
         
         input 
             padding: 8px
+            width: 300px
+            border-top-right-radius: $disabled-0
+            border-bottom-right-radius: $disabled-0
+            background-color: #f8f8f8
 
         button 
             display: grid
             place-items: center
-            background-color: $primary-color
+            background-color: #f5f5f5
             cursor: pointer
+            padding: 8px
+            border-top-left-radius: $disabled-0
+            border-bottom-left-radius: $disabled-0
             &:hover
                 filter: $brightness
 
@@ -130,7 +144,7 @@ main
             margin: 8px 0
         
         button 
-            background-color: #08D9D6
+            background-color: $very-light
             color: $font
             border: 0
             border-radius: $border-radius
@@ -313,7 +327,7 @@ aside
     z-index: 1
     .add_book
         border-radius: $border-radius
-        background: #08D9D6
+        background: $very-light
         display: flex
         justify-content: center
         align-items: center

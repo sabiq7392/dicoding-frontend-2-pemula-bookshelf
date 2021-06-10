@@ -1,5 +1,7 @@
-if (typeof(Storage) !== "undefined") {
-    console.log("Mendukung web storage");
-} else {
-    console.log("Tidak mendukung web storage");
+function isStorageExist(){
+    if(typeof(Storage) === undefined){
+        alert("Browser kamu tidak mendukung local storage");
+        return false
+    } 
+    return true;
 }

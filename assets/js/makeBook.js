@@ -1,14 +1,18 @@
 const DELETED = [];
-const STORAGE = [];
+let STORAGE = [];
+const CONTAINER_INCOMPLETED = document.getElementById("incompleteBookshelfList");
+const CONTAINER_COMPLETED = document.getElementById("completeBookshelfList");
+
+//==========
 
 function makeBook(){
 
-    let book = {
+    const book = {
         id: +new Date(),
         title: document.getElementById("inputBookTitle").value,
         author: document.getElementById("inputBookAuthor").value,
         year: document.getElementById("inputBookYear").value,
-        isComplete: null,
+        isComplete: null
     }
 
     const elementTitle = document.createElement("h3");
@@ -30,39 +34,24 @@ function makeBook(){
     
     containerArticle.append(elementTitle, elementAuthor, elementYear, containerAction);
 
-    if (document.getElementById("inputBookIsComplete").checked === true){
+    if (document.getElementById("inputBookIsComplete").checked == true){
         book.isComplete = true;
         containerArticle.classList.add("background-finished")
         containerAction.append(unfinishedButton(), deleteButton());
-        document.getElementById("completeBookshelfList").append(containerArticle);  
-    } else {
+        CONTAINER_COMPLETED.append(containerArticle);  
+
+    } else if (document.getElementById("inputBookIsComplete").checked == false) {
         book.isComplete = false;
         containerArticle.classList.add("background-unfinished")
         containerAction.append(finishButton(), deleteButton());
-        document.getElementById("incompleteBookshelfList").append(containerArticle);
+        CONTAINER_INCOMPLETED.append(containerArticle);
     }
 
-    STORAGE.push(book);
+    // STORAGE.push(book);
     // Save Data to Storage
-    // let i = 0
-    let convertToString = JSON.stringify(book);
-    localStorage.setItem("book", convertToString);
-    //
+    STORAGE.push(book);
+    return containerArticle
 }
-
-document.getElementById("inputBookIsComplete").addEventListener("click", () => {
-    if(document.getElementById("inputBookIsComplete").checked === true) {
-        document.getElementById("textButtonFinish-unfinished").innerText = "shelf finished";
-        for (let i = 0; i < document.getElementsByName("inputPriority").length; i++){
-            document.getElementsByName("inputPriority")[i].setAttribute("disabled", true);
-        }
-    } else {
-        for (let i = 0; i < document.getElementsByName("inputPriority").length; i++){
-            document.getElementsByName("inputPriority")[i].removeAttribute("disabled");
-        }
-        document.getElementById("textButtonFinish-unfinished").innerText = "shelf unfinished";
-    }
-});
 
 function unfinishedButton(){
     const button = document.createElement("button");
@@ -89,6 +78,20 @@ function unfinishedButton(){
     });
     return button;
 }
+
+document.getElementById("inputBookIsComplete").addEventListener("click", () => {
+    if(document.getElementById("inputBookIsComplete").checked === true) {
+        document.getElementById("textButtonFinish-unfinished").innerText = "shelf finished";
+        for (let i = 0; i < document.getElementsByName("inputPriority").length; i++){
+            document.getElementsByName("inputPriority")[i].setAttribute("disabled", true);
+        }
+    } else {
+        for (let i = 0; i < document.getElementsByName("inputPriority").length; i++){
+            document.getElementsByName("inputPriority")[i].removeAttribute("disabled");
+        }
+        document.getElementById("textButtonFinish-unfinished").innerText = "shelf unfinished";
+    }
+});
 
 function finishButton(){
     const button = document.createElement("button");
@@ -126,7 +129,20 @@ function deleteButton(){
     return button;
 }
 
+function saveDataToStorage(){
+    let convertToString = JSON.stringify(STORAGE);
+    localStorage.setItem("book", convertToString);
+}
 
+
+// function loadDataFromStorage(){
+//     const dataInStorage = localStorage.getItem("book")
+//     let data = JSON.parse(dataInStorage);
+    
+//     if(data !== null) {
+//         STORAGE = data;
+//     }
+// }
 
 
 
