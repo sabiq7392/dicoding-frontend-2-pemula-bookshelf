@@ -391,13 +391,13 @@ main {
   cursor: pointer;
 }
 
-.book_shelf .book_list .book_item .action .finish_or_not, .book_shelf .book_list .book_item .action .delete {
+.book_shelf .book_list .book_item .action .finish_or_cancel, .book_shelf .book_list .book_item .action .delete {
   -webkit-transition: 0.2s;
   transition: 0.2s;
   font-weight: 500;
 }
 
-.book_shelf .book_list .book_item .action .finish_or_not {
+.book_shelf .book_list .book_item .action .finish_or_cancel {
   color: #1B262C;
   background: #55B688;
 }
@@ -408,7 +408,7 @@ main {
   background: rgba(0, 0, 0, 0);
 }
 
-.book_shelf .book_list .book_item .action .finish_or_not:hover, .book_shelf .book_list .book_item .action .delete:hover {
+.book_shelf .book_list .book_item .action .finish_or_cancel:hover, .book_shelf .book_list .book_item .action .delete:hover {
   -webkit-filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
           filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
 }

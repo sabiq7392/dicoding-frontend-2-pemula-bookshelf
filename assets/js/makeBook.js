@@ -1,6 +1,3 @@
-const DELETED = [];
-let STORAGE = [];
-
 const CONTAINER_INCOMPLETED = document.getElementById("incompleteBookshelfList");
 const CONTAINER_COMPLETED = document.getElementById("completeBookshelfList");
 
@@ -11,6 +8,8 @@ const inputBookId_Date = +new Date();
 
 const inputBookIsComplete = document.getElementById("inputBookIsComplete");
 
+const getDataInStorage = localStorage.getItem("book");
+let theData = JSON.parse(getDataInStorage);
 //==========
 
 function makeBook(){
@@ -25,31 +24,17 @@ function makeBook(){
 
     if (inputBookIsComplete.checked == true){
         book.isComplete = true;
-    } else if (inputBookIsComplete.checked == false) {
+    } else {
         book.isComplete = false;
     }
 
-    const containerArticle = document.createElement("article");
-    containerArticle.classList.add("book_item");
-    containerArticle.id = book.id;
-    
-    containerArticle.append(
-        elementTitle(book.title), 
-        elementAuthor(book.author), 
-        elementYear(book.year), 
-        containerAction(book.isComplete)
+    containerArticle(
+        book.id, 
+        book.title, 
+        book.author, 
+        book.year, 
+        book.isComplete
     );
-
-    if (book.isComplete == true){
-        containerArticle.classList.add("background-finished");
-        containerAction().append(unfinishedButton(), deleteButton());
-        CONTAINER_COMPLETED.append(containerArticle);  
-
-    } else if (book.isComplete == false) {
-        containerArticle.classList.add("background-unfinished");
-        containerAction().append(finishButton(), deleteButton());
-        CONTAINER_INCOMPLETED.append(containerArticle);
-    }
 
     // Save Data to Storage
     STORAGE.push(book);
@@ -78,7 +63,7 @@ function containerAction(bookIsComplete) {
     const containerAction = document.createElement("div");
     containerAction.classList.add("action");
     if (bookIsComplete == true){
-        containerAction.append(unfinishedButton(), deleteButton());
+        containerAction.append(cancelButton(), deleteButton());
     } else if (bookIsComplete == false) {
         containerAction.append(finishButton(), deleteButton());
     }
@@ -86,36 +71,103 @@ function containerAction(bookIsComplete) {
     return containerAction;
 }
 
-function containerArticle(bookId) {
+function containerArticle(bookId, bookTitle, bookAuthor, bookYear, bookIsComplete) {
     const containerArticle = document.createElement("article");
     containerArticle.classList.add("book_item");
     containerArticle.id = bookId;
+    
+    containerArticle.append(
+        elementTitle(bookTitle), 
+        elementAuthor(bookAuthor), 
+        elementYear(bookYear), 
+        containerAction(bookIsComplete)
+    );
+
+    if (bookIsComplete == true){
+        containerArticle.classList.add("background-finished");
+        // containerAction().append(cancelButton(), deleteButton());
+        CONTAINER_COMPLETED.append(containerArticle);  
+
+    } else if (bookIsComplete == false) {
+        containerArticle.classList.add("background-unfinished");
+        // containerAction().append(finishButton(), deleteButton());
+        CONTAINER_INCOMPLETED.append(containerArticle);
+    }
 
     return containerArticle
 }
 
-function unfinishedButton(){
+function cancelButton(){
     const button = document.createElement("button");
 
-    button.classList.add("finish_or_not");
-    button.innerText = "Unfinished ";
+    button.classList.add("finish_or_cancel");
+    button.innerText = "Cancel ";
     button.addEventListener("click", (event) => {
         const containerIncompleted = document.getElementById("incompleteBookshelfList");
         const containerCompleted = document.getElementById("completeBookshelfList");
         const containerArticle = event.target.parentElement.parentElement;
 
-        if (event.target.innerText == "Unfinished") {
+        if (event.target.innerText == "Cancel") {
             event.target.innerText = "Finished";
-            containerIncompleted.insertBefore(event.target.parentElement.parentElement, containerIncompleted.firstChild);
+            containerIncompleted.appendChild(event.target.parentElement.parentElement, containerIncompleted.firstChild);
             containerArticle.classList.add("background-unfinished");
             containerArticle.classList.remove("background-finished");
 
         } else {
-            event.target.innerText = "Unfinished ";
-            containerCompleted.insertBefore(event.target.parentElement.parentElement, containerCompleted.firstChild);
+            event.target.innerText = "Cancel";
+            containerCompleted.appendChild(event.target.parentElement.parentElement, containerCompleted.firstChild);
             containerArticle.classList.add("background-finished");
             containerArticle.classList.remove("background-unfinished");
         }
+
+    });
+
+    return button;
+}
+
+function finishButton(){
+    const button = document.createElement("button");
+    button.classList.add("finish_or_cancel");
+    button.innerText = "Finished";
+    button.addEventListener("click", (event) => {
+        const containerCompleted = document.getElementById("completeBookshelfList");
+        const containerIncompleted = document.getElementById("incompleteBookshelfList");
+        const containerArticle = event.target.parentElement.parentElement;
+
+        if (event.target.innerText == "Finished") {
+            event.target.innerText = "Cancel";
+            containerCompleted.appendChild(event.target.parentElement.parentElement, containerCompleted.firstChild)
+            containerArticle.classList.add("background-finished");
+            containerArticle.classList.remove("background-unfinished");
+
+        } else {
+            event.target.innerText = "Finished";
+            containerIncompleted.appendChild(event.target.parentElement.parentElement, containerIncompleted.firstChild)
+            containerArticle.classList.add("background-unfinished");
+            containerArticle.classList.remove("background-finished");
+        }
+    });
+
+    return button;
+}
+
+function deleteButton(){
+    const button = document.createElement("button");
+    button.classList.add("delete");
+    button.innerText = "Delete";
+    button.addEventListener("click", (event) => {
+        DELETED.push(event.target.parentElement.parentElement); // ketika didelete akan tertampung di variabel DELETE 
+        event.target.parentElement.parentElement.remove();
+        
+        let indexOfBook = 0
+        for (myStorage of STORAGE) {
+            if(myStorage.id == event.target.parentElement.parentElement.id) {
+                STORAGE.splice(indexOfBook, 1)
+            }
+            indexOfBook++;
+        }
+
+        removeDataFromStorage()
     });
 
     return button;
@@ -134,42 +186,3 @@ inputBookIsComplete.addEventListener("click", () => {
         document.getElementById("textButtonFinish-unfinished").innerText = "shelf unfinished";
     }
 });
-
-function finishButton(){
-    const button = document.createElement("button");
-    button.classList.add("finish_or_not");
-    button.innerText = "Finished";
-    button.addEventListener("click", (event) => {
-        const containerCompleted = document.getElementById("completeBookshelfList");
-        const containerIncompleted = document.getElementById("incompleteBookshelfList");
-        const containerArticle = event.target.parentElement.parentElement;
-
-        if (event.target.innerText == "Finished") {
-            event.target.innerText = "Unfinished ";
-            containerCompleted.insertBefore(event.target.parentElement.parentElement, containerCompleted.firstChild)
-            containerArticle.classList.add("background-finished");
-            containerArticle.classList.remove("background-unfinished");
-
-        } else {
-            event.target.innerText = "Finished";
-            containerIncompleted.insertBefore(event.target.parentElement.parentElement, containerIncompleted.firstChild)
-            containerArticle.classList.add("background-unfinished");
-            containerArticle.classList.remove("background-finished");
-        }
-    });
-
-    return button;
-}
-
-function deleteButton(){
-    const button = document.createElement("button");
-    button.classList.add("delete");
-    button.innerText = "Delete";
-    button.addEventListener("click", (event) => {
-        DELETED.push(event.target.parentElement.parentElement); // ketika didelete akan tertampung di variabel DELETE 
-        event.target.parentElement.parentElement.remove();
-    });
-
-    return button;
-}
-

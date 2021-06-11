@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    inputBookIsComplete.checked = false;
     document.getElementById("inputImportant").checked = true;
+    inputBookIsComplete.checked = false;
     
     const formInputBook = document.getElementById("inputBook");
     formInputBook.addEventListener("submit", (event) => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let theData = JSON.parse(getDataInStorage);
 
         if (theData !== null) {
-            STORAGE = theData; // Ini biar data ga ketindih
+            STORAGE = theData; 
         }
 
         for (myStorage of STORAGE) {
@@ -28,29 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 year: myStorage.year,
                 isComplete: myStorage.isComplete
             }
-        
-            const containerArticle = document.createElement("article");
-            containerArticle.classList.add("book_item");
-            containerArticle.id = savedBook.id;
             
-            containerArticle.append(
-                elementTitle(savedBook.title), 
-                elementAuthor(savedBook.author), 
-                elementYear(savedBook.year), 
-                containerAction(savedBook.isComplete)
+            containerArticle(
+                savedBook.id, 
+                savedBook.title, 
+                savedBook.author, 
+                savedBook.year, 
+                savedBook.isComplete
             );
-        
-            if (savedBook.isComplete == true){
-                containerArticle.classList.add("background-finished");
-                containerAction().append(unfinishedButton(), deleteButton());
-                CONTAINER_COMPLETED.append(containerArticle);  
-        
-            } else if (savedBook.isComplete == false) {
-                containerArticle.classList.add("background-unfinished");
-                containerAction().append(finishButton(), deleteButton());
-                CONTAINER_INCOMPLETED.append(containerArticle);
-            }
-
+            
         }
     }
+
 });

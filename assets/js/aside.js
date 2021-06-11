@@ -1,7 +1,8 @@
+const asideAddBook = document.getElementById("asideAddBook");
 const inputSection = document.getElementById("inputSection");
 const overlay = document.getElementById("overlay");
 
-document.getElementById("asideAddBook").addEventListener("click", () => {
+asideAddBook.addEventListener("click", () => {
 
     if (overlay.classList.contains("d-none")){
         overlay.classList.remove("d-none");
@@ -15,7 +16,7 @@ document.getElementById("asideAddBook").addEventListener("click", () => {
     }
 
     document.addEventListener("click", (event) => { // ketika click diluar input element akan otomatis close
-        let clickedElement = event.target;
+        const clickedElement = event.target;
         if (clickedElement != inputSection && clickedElement == overlay && overlay.classList.contains("d-grid")) {
             overlay.classList.remove("d-grid");
             overlay.classList.add("d-none");

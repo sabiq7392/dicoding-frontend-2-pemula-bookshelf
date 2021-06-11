@@ -72,7 +72,6 @@ input:focus
     display: flex
     flex-direction: column
     align-items: center
-    // padding: 16px
     border-radius: $border-radius
 
     h2 
@@ -204,8 +203,6 @@ main
                     label
                         transform: translateY(-2px)
                         font-weight: 500
-
-                            
                             
 .book_shelf 
     padding: 16px
@@ -290,11 +287,11 @@ main
                     border-radius: $border-radius
                     cursor: pointer
 
-                .finish_or_not, .delete
+                .finish_or_cancel, .delete
                     transition: $transition-fast
                     font-weight: 500
 
-                .finish_or_not
+                .finish_or_cancel
                     color: $font
                     background: #55B688
 
@@ -303,7 +300,7 @@ main
                     color: $font
                     background: $background-transparent
                 
-                .finish_or_not:hover, .delete:hover
+                .finish_or_cancel:hover, .delete:hover
                     filter: $shadow-bottom
                 
         .background-unfinished
@@ -388,7 +385,6 @@ footer
         right: -500px
     100%
         inset: 0
-
 
 // =========== Class Spawn
 
