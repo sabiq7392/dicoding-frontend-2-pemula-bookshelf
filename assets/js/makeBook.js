@@ -1,7 +1,15 @@
 const DELETED = [];
 let STORAGE = [];
+
 const CONTAINER_INCOMPLETED = document.getElementById("incompleteBookshelfList");
 const CONTAINER_COMPLETED = document.getElementById("completeBookshelfList");
+
+const inputBookTitle = document.getElementById("inputBookTitle");
+const inputBookAuthor = document.getElementById("inputBookAuthor");
+const inputBookYear =  document.getElementById("inputBookYear");
+const inputBookId_Date = +new Date();
+
+const inputBookIsComplete = document.getElementById("inputBookIsComplete");
 
 //==========
 
@@ -9,47 +17,80 @@ function makeBook(){
 
     const book = {
         id: +new Date(),
-        title: document.getElementById("inputBookTitle").value,
-        author: document.getElementById("inputBookAuthor").value,
-        year: document.getElementById("inputBookYear").value,
+        title: inputBookTitle.value,
+        author: inputBookAuthor.value,
+        year: inputBookYear.value,
         isComplete: null
     }
 
-    const elementTitle = document.createElement("h3");
-    elementTitle.innerText = book.title;
-    elementTitle.classList.add("title")
-
-    const elementAuthor = document.createElement("p");
-    elementAuthor.innerText = "Penulis: " + book.author;
-
-    const elementYear = document.createElement("p");
-    elementYear.innerText = "Tahun: " + book.year;
-
-    const containerAction = document.createElement("div");
-    containerAction.classList.add("action");
+    if (inputBookIsComplete.checked == true){
+        book.isComplete = true;
+    } else if (inputBookIsComplete.checked == false) {
+        book.isComplete = false;
+    }
 
     const containerArticle = document.createElement("article");
     containerArticle.classList.add("book_item");
     containerArticle.id = book.id;
     
-    containerArticle.append(elementTitle, elementAuthor, elementYear, containerAction);
+    containerArticle.append(
+        elementTitle(book.title), 
+        elementAuthor(book.author), 
+        elementYear(book.year), 
+        containerAction(book.isComplete)
+    );
 
-    if (document.getElementById("inputBookIsComplete").checked == true){
-        book.isComplete = true;
-        containerArticle.classList.add("background-finished")
-        containerAction.append(unfinishedButton(), deleteButton());
+    if (book.isComplete == true){
+        containerArticle.classList.add("background-finished");
+        containerAction().append(unfinishedButton(), deleteButton());
         CONTAINER_COMPLETED.append(containerArticle);  
 
-    } else if (document.getElementById("inputBookIsComplete").checked == false) {
-        book.isComplete = false;
-        containerArticle.classList.add("background-unfinished")
-        containerAction.append(finishButton(), deleteButton());
+    } else if (book.isComplete == false) {
+        containerArticle.classList.add("background-unfinished");
+        containerAction().append(finishButton(), deleteButton());
         CONTAINER_INCOMPLETED.append(containerArticle);
     }
 
-    // STORAGE.push(book);
     // Save Data to Storage
     STORAGE.push(book);
+}
+
+function elementTitle(bookTitle) {
+    const elementTitle = document.createElement("h3");
+    elementTitle.innerText = bookTitle;
+    elementTitle.classList.add("title");
+    return elementTitle;
+}
+
+function elementAuthor(bookAuthor) {
+    const elementAuthor = document.createElement("p");
+    elementAuthor.innerText = "Penulis: " + bookAuthor;
+    return elementAuthor;
+}
+
+function elementYear(bookYear) {
+    const elementYear = document.createElement("p");
+    elementYear.innerText = "Tahun: " + bookYear;
+    return elementYear;
+}
+
+function containerAction(bookIsComplete) {
+    const containerAction = document.createElement("div");
+    containerAction.classList.add("action");
+    if (bookIsComplete == true){
+        containerAction.append(unfinishedButton(), deleteButton());
+    } else if (bookIsComplete == false) {
+        containerAction.append(finishButton(), deleteButton());
+    }
+
+    return containerAction;
+}
+
+function containerArticle(bookId) {
+    const containerArticle = document.createElement("article");
+    containerArticle.classList.add("book_item");
+    containerArticle.id = bookId;
+
     return containerArticle
 }
 
@@ -76,10 +117,11 @@ function unfinishedButton(){
             containerArticle.classList.remove("background-unfinished");
         }
     });
+
     return button;
 }
 
-document.getElementById("inputBookIsComplete").addEventListener("click", () => {
+inputBookIsComplete.addEventListener("click", () => {
     if(document.getElementById("inputBookIsComplete").checked === true) {
         document.getElementById("textButtonFinish-unfinished").innerText = "shelf finished";
         for (let i = 0; i < document.getElementsByName("inputPriority").length; i++){
@@ -115,6 +157,7 @@ function finishButton(){
             containerArticle.classList.remove("background-finished");
         }
     });
+
     return button;
 }
 
@@ -126,26 +169,7 @@ function deleteButton(){
         DELETED.push(event.target.parentElement.parentElement); // ketika didelete akan tertampung di variabel DELETE 
         event.target.parentElement.parentElement.remove();
     });
+
     return button;
 }
-
-function saveDataToStorage(){
-    let convertToString = JSON.stringify(STORAGE);
-    localStorage.setItem("book", convertToString);
-}
-
-
-// function loadDataFromStorage(){
-//     const dataInStorage = localStorage.getItem("book")
-//     let data = JSON.parse(dataInStorage);
-    
-//     if(data !== null) {
-//         STORAGE = data;
-//     }
-// }
-
-
-
-
-
 

@@ -5,3 +5,8 @@ function isStorageExist(){
     } 
     return true;
 }
+
+function saveDataToStorage(){ // belom dites
+    let convertToString = JSON.stringify(STORAGE);
+    localStorage.setItem("book", convertToString);
+}
