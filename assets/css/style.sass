@@ -209,6 +209,8 @@ main
 .book_shelf 
     padding: 16px
     border-radius: $border-radius
+    display: grid
+    grid-gap: $gap-2
     &:nth-child(2)
         margin-top: 30px
         
@@ -315,7 +317,7 @@ main
         .important_priority
             background: #FFBDC0
         
-        .middle_priority
+        .medium_priority
             background: #ecbe85
 
         .low_priority
@@ -382,7 +384,7 @@ refresh_submit
         font-size: 20px
 
 custom_dialog
-    display: grid
+    display: none
     place-items: center
     width: 100vw
     height: 100px

@@ -284,6 +284,9 @@ main {
 .book_shelf {
   padding: 16px;
   border-radius: 5px;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 10px;
 }
 
 .book_shelf:nth-child(2) {
@@ -426,7 +429,7 @@ main {
   background: #FFBDC0;
 }
 
-.book_shelf .book_list .middle_priority {
+.book_shelf .book_list .medium_priority {
   background: #ecbe85;
 }
 
@@ -523,8 +526,7 @@ refresh_submit div > i {
 }
 
 custom_dialog {
-  display: -ms-grid;
-  display: grid;
+  display: none;
   place-items: center;
   width: 100vw;
   height: 100px;

@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: myStorage.title,
                 author: myStorage.author,
                 year: myStorage.year,
-                isComplete: myStorage.isComplete
+                isComplete: myStorage.isComplete,
+                priority: myStorage.priority
             }
             
             containerArticle(
@@ -37,9 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 savedBook.title, 
                 savedBook.author, 
                 savedBook.year, 
-                savedBook.isComplete
+                savedBook.isComplete,
+                savedBook.priority
             );
         }
     }
+
 
 });

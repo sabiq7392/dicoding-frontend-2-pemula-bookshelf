@@ -1,4 +1,6 @@
-const CONTAINER_INCOMPLETED = document.getElementById("incompleteBookshelfList");
+const CONTAINER_INCOMPLETED = document.getElementById("incompleteBookshelfListImportant");
+const CONTAINER_INCOMPLETED_MEDIUM = document.getElementById("incompleteBookshelfListMedium");
+const CONTAINER_INCOMPLETED_LOW = document.getElementById("incompleteBookshelfListLow");
 const CONTAINER_COMPLETED = document.getElementById("completeBookshelfList");
 
 const inputBookTitle = document.getElementById("inputBookTitle");
@@ -8,6 +10,7 @@ const inputBookId_Date = +new Date();
 
 const inputBookIsComplete = document.getElementById("inputBookIsComplete");
 const inputPriority = document.getElementsByName("inputPriority");
+
 
 //==========
 
@@ -28,12 +31,23 @@ function makeBook(){
         book.isComplete = false;
     }
 
+    if (inputPriority[0].checked == true) {
+        book.priority = "important";
+    } else if (inputPriority[1].checked == true) {
+        book.priority = "medium";
+
+    } else if (inputPriority[2].checked == true) {
+        book.priority = "low";
+
+    }
+
     containerArticle(
         book.id, 
         book.title, 
         book.author, 
         book.year, 
-        book.isComplete
+        book.isComplete,
+        book.priority
     );
 
     // Save Data to Storage
@@ -59,19 +73,19 @@ function elementYear(bookYear) {
     return elementYear;
 }
 
-function containerAction(bookIsComplete) {
+function containerAction(bookIsComplete, bookPriority) {
     const containerAction = document.createElement("div");
     containerAction.classList.add("action");
     if (bookIsComplete == true){
-        containerAction.append(cancelButton(), deleteButton());
+        containerAction.append(cancelButton(bookPriority), deleteButton());
     } else if (bookIsComplete == false) {
-        containerAction.append(finishButton(), deleteButton());
+        containerAction.append(finishButton(bookPriority), deleteButton());
     }
 
     return containerAction;
 }
 
-function containerArticle(bookId, bookTitle, bookAuthor, bookYear, bookIsComplete) {
+function containerArticle(bookId, bookTitle, bookAuthor, bookYear, bookIsComplete, bookPriority) {
     const containerArticle = document.createElement("article");
     containerArticle.classList.add("book_item");
     containerArticle.id = bookId;
@@ -80,22 +94,31 @@ function containerArticle(bookId, bookTitle, bookAuthor, bookYear, bookIsComplet
         elementTitle(bookTitle), 
         elementAuthor(bookAuthor), 
         elementYear(bookYear), 
-        containerAction(bookIsComplete)
+        containerAction(bookIsComplete, bookPriority)
     );
 
     if (bookIsComplete == true){
         containerArticle.classList.add("background-finished");
         CONTAINER_COMPLETED.append(containerArticle);  
 
-    } else if (bookIsComplete == false) {
-        containerArticle.classList.add("background-unfinished");
+    } else if (bookIsComplete == false && bookPriority == "important") {
+        containerArticle.classList.add("important_priority");
         CONTAINER_INCOMPLETED.append(containerArticle);
+
+    } else if (bookIsComplete == false && bookPriority == "medium") {
+        containerArticle.classList.add("medium_priority");
+        CONTAINER_INCOMPLETED_MEDIUM.append(containerArticle);
+
+    } else if (bookIsComplete == false && bookPriority == "low")  {
+        containerArticle.classList.add("low_priority");
+        CONTAINER_INCOMPLETED_LOW.append(containerArticle);
     }
+        
 
     return containerArticle
 }
 
-function cancelButton(){
+function cancelButton(bookPriority){
     const button = document.createElement("button");
 
     button.classList.add("finish_or_cancel");
@@ -103,17 +126,31 @@ function cancelButton(){
     button.addEventListener("click", (event) => {
         const containerArticle = event.target.parentElement.parentElement;
 
-        if (event.target.innerText == "Cancel") {
+        if (event.target.innerText == "Cancel" && bookPriority == "important") {
             event.target.innerText = "Finished";
             CONTAINER_INCOMPLETED.appendChild(event.target.parentElement.parentElement, CONTAINER_INCOMPLETED.firstChild);
-            containerArticle.classList.add("background-unfinished");
+            containerArticle.classList.add("important_priority");
             containerArticle.classList.remove("background-finished");
 
-        } else {
+        } else if (event.target.innerText == "Cancel" && bookPriority == "medium") {
+            event.target.innerText = "Finished";
+            CONTAINER_INCOMPLETED_MEDIUM.appendChild(event.target.parentElement.parentElement, CONTAINER_INCOMPLETED_MEDIUM.firstChild);
+            containerArticle.classList.add("medium_priority");
+            containerArticle.classList.remove("background-finished");
+
+        } else if (event.target.innerText == "Cancel" && bookPriority == "low") {
+            event.target.innerText = "Finished";
+            CONTAINER_INCOMPLETED_LOW.appendChild(event.target.parentElement.parentElement, CONTAINER_INCOMPLETED_LOW.firstChild);
+            containerArticle.classList.add("low_priority");
+            containerArticle.classList.remove("background-finished");
+
+        }
+        
+        else if (event.target.innerText == "Finished") {
             event.target.innerText = "Cancel";
             CONTAINER_COMPLETED.appendChild(event.target.parentElement.parentElement, CONTAINER_COMPLETED.firstChild);
             containerArticle.classList.add("background-finished");
-            containerArticle.classList.remove("background-unfinished");
+            // containerArticle.classList.remove("background-unfinished");
         }
 
         for (myStorage of STORAGE) {
@@ -139,7 +176,7 @@ function cancelButton(){
     return button;
 }
 
-function finishButton(){
+function finishButton(bookPriority){
     const button = document.createElement("button");
     button.classList.add("finish_or_cancel");
     button.innerText = "Finished";
@@ -150,12 +187,24 @@ function finishButton(){
             event.target.innerText = "Cancel";
             CONTAINER_COMPLETED.appendChild(event.target.parentElement.parentElement, CONTAINER_COMPLETED.firstChild)
             containerArticle.classList.add("background-finished");
-            containerArticle.classList.remove("background-unfinished");
+            // containerArticle.classList.remove("background-unfinished");
 
-        } else {
+        } else if (event.target.innerText == "Cancel" && bookPriority == "important") {
             event.target.innerText = "Finished";
             CONTAINER_INCOMPLETED.appendChild(event.target.parentElement.parentElement, CONTAINER_INCOMPLETED.firstChild)
-            containerArticle.classList.add("background-unfinished");
+            containerArticle.classList.add("important_priority");
+            containerArticle.classList.remove("background-finished");
+
+        } else if (event.target.innerText == "Cancel" && bookPriority == "medium") {
+            event.target.innerText = "Finished";
+            CONTAINER_INCOMPLETED_MEDIUM.appendChild(event.target.parentElement.parentElement, CONTAINER_INCOMPLETED_MEDIUM.firstChild)
+            containerArticle.classList.add("medium_priority");
+            containerArticle.classList.remove("background-finished");
+
+        } else if (event.target.innerText == "Cancel" && bookPriority == "low") {
+            event.target.innerText = "Finished";
+            CONTAINER_INCOMPLETED_LOW.appendChild(event.target.parentElement.parentElement, CONTAINER_INCOMPLETED_LOW.firstChild)
+            containerArticle.classList.add("low_priority");
             containerArticle.classList.remove("background-finished");
         }
 
@@ -206,11 +255,11 @@ function deleteButton(){
             indexOfBookInArray++;
         }
 
-        customDialog.classList.add("animation_center_visible");
+        customDialog.classList.add("d-grid");
         customDialogText.innerText = "Buku " + event.target.parentElement.parentElement.firstChild.textContent + " Berhasil di Hapus";
-        customDialog.addEventListener("transitionend", () => {
-            customDialog.classList.remove("animation_center_visible");
-        });
+        // customDialog.addEventListener("transitionend", () => {
+        //     customDialog.classList.remove("d-grid");
+        // });
 
         updateDataToStorage();
     });
@@ -223,6 +272,7 @@ function editButton(){
 }
 
 inputBookIsComplete.addEventListener("click", () => {
+    const inputPriority = document.getElementsByName("inputPriority");
     const textButtonFinish_unfinished = document.getElementById("textButtonFinish-unfinished");
 
     if(inputBookIsComplete.checked === true) {

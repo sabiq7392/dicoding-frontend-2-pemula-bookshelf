@@ -38,7 +38,17 @@
             <li><a href="">Middle Priority</a></li>
             <li><a href="">Low Priority</a></li>
         </ul>
-        <div id="incompleteBookshelfList" class="book_list">
+        <div id="incompleteBookshelfListImportant" class="book_list">
+
+
+
+        </div>
+        <div id="incompleteBookshelfListMedium" class="book_list">
+
+
+
+        </div>
+        <div id="incompleteBookshelfListLow" class="book_list">
 
 
 
@@ -85,15 +95,15 @@
                     <div class="input_priority_wrapper">
                         <div>
                             <label for="inputImportant">Important</label>
-                            <input id="inputImportant" name="inputPriority" type="radio">
+                            <input id="inputImportant" name="inputPriority" type="radio" value="important">
                         </div>
                         <div>
-                            <label for="inputMiddlePriority">Middle</label>
-                            <input id="inputMiddlePriority" name="inputPriority" type="radio">
+                            <label for="inputMiddlePriority">Medium</label>
+                            <input id="inputMiddlePriority" name="inputPriority" type="radio" value="middle">
                         </div>
                         <div>
                             <label for="inputLowPriority">Low</label>
-                            <input id="inputLowPriority" name="inputPriority" type="radio">
+                            <input id="inputLowPriority" name="inputPriority" type="radio" value="low">
                         </div>
                     </div>
                 </div>  
@@ -115,6 +125,7 @@
         </div>
     </aside>
 </main>
+
 <refresh_submit id="refreshSubmit">
     <div><i class="bi bi-arrow-repeat"></i></div>
 </refresh_submit>
