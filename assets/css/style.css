@@ -40,14 +40,14 @@ input, button {
 
 input:focus {
   outline: 1px solid #08D9D6;
-  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1));
-          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1));
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
 }
 
 .head_bar {
   background-color: white;
-  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1));
-          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1));
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -67,6 +67,10 @@ input:focus {
       -ms-flex-align: center;
           align-items: center;
   margin: auto;
+}
+
+.head_bar .container .logo_brand > img {
+  width: 200px;
 }
 
 .search_section {
@@ -136,7 +140,7 @@ input:focus {
 }
 
 main {
-  max-width: 960px;
+  max-width: 1140px;
   width: 100%;
   margin: 60px auto;
   padding: 16px;
@@ -346,12 +350,10 @@ main {
   border-radius: 5px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
   background: white;
-  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1));
-          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.1));
 }
 
 .book_shelf .book_list:nth-child(2) {
@@ -359,15 +361,18 @@ main {
 }
 
 .book_shelf .book_list .book_item {
+  min-width: 253.5px;
   padding: 8px 16px 16px 16px;
   border-radius: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
 }
 
 .book_shelf .book_list .book_item:hover {
-  -webkit-filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15)) brightness(115%);
-          filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15)) brightness(115%);
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25)) brightness(125%);
+          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25)) brightness(125%);
   -webkit-transform: translateY(-5px);
           transform: translateY(-5px);
 }
@@ -380,8 +385,8 @@ main {
 .book_shelf .book_list .book_item .action {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (auto)[2];
-      grid-template-columns: repeat(2, auto);
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
   grid-gap: 5px;
 }
 
@@ -399,7 +404,7 @@ main {
 
 .book_shelf .book_list .book_item .action .finish_or_cancel {
   color: #1B262C;
-  background: #55B688;
+  background: #4bd494;
 }
 
 .book_shelf .book_list .book_item .action .delete {
@@ -414,15 +419,25 @@ main {
 }
 
 .book_shelf .book_list .background-unfinished {
-  background: #FFA3A7;
-}
-
-.book_shelf .book_list .background-unfinished-2 {
   background: #FFBDC0;
 }
 
+.book_shelf .book_list .important_priority {
+  background: #FFBDC0;
+}
+
+.book_shelf .book_list .middle_priority {
+  background: #ecbe85;
+}
+
+.book_shelf .book_list .low_priority {
+  background: #55B688;
+  -webkit-filter: brightness(115%);
+          filter: brightness(115%);
+}
+
 .book_shelf .book_list .background-finished {
-  background: #D1D1D1;
+  background: #ececec;
 }
 
 .book_shelf .book_list .background-finished-2 {
@@ -452,10 +467,13 @@ aside .add_book {
       -ms-flex-align: center;
           align-items: center;
   grid-gap: 10px;
-  padding: 10px;
+  padding: 20px;
   -webkit-filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
           filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15));
   -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-animation: bounce 1.5s;
+          animation: bounce 1.5s;
   transition: 0.2s;
   cursor: pointer;
 }
@@ -470,7 +488,7 @@ aside .add_book span {
 }
 
 aside .add_book:hover {
-  padding: 10px 15px;
+  padding: 20px 35px;
   -webkit-filter: brightness(90%);
           filter: brightness(90%);
 }
@@ -479,6 +497,51 @@ aside .add_book:hover span {
   position: relative;
   opacity: 1;
   z-index: 1;
+}
+
+refresh_submit {
+  display: none;
+  position: fixed;
+  top: 85px;
+  left: 50%;
+  z-index: 5 !important;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 100%;
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+          filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+  -webkit-animation: from_top 1s;
+          animation: from_top 1s;
+  -webkit-transition: 1s;
+  transition: 1s;
+  cursor: pointer;
+}
+
+refresh_submit div > i {
+  font-size: 20px;
+}
+
+custom_dialog {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  z-index: 0;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #f0f0f0;
+  font-size: 30px;
+  font-weight: bold;
+  -webkit-transition: 2s;
+  transition: 2s;
+  cursor: context-menu;
 }
 
 footer {
@@ -530,7 +593,7 @@ footer .container ul li a i {
 
 @-webkit-keyframes go_center {
   0% {
-    right: -500px;
+    right: -300px;
   }
   100% {
     inset: 0;
@@ -539,10 +602,156 @@ footer .container ul li a i {
 
 @keyframes go_center {
   0% {
-    right: -500px;
+    right: -300px;
   }
   100% {
     inset: 0;
+  }
+}
+
+@-webkit-keyframes center_visible {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes center_visible {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes from_top {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 85px;
+    opacity: 1;
+  }
+}
+
+@keyframes from_top {
+  0% {
+    top: -100px;
+    opacity: 0;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 85px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  10% {
+    -webkit-transform: translateY(-30px);
+            transform: translateY(-30px);
+  }
+  20% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  30% {
+    -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+  }
+  40% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  50% {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  60% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  70% {
+    -webkit-transform: translateY(-15px);
+            transform: translateY(-15px);
+  }
+  80% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  90% {
+    -webkit-transform: translateY(-15px);
+            transform: translateY(-15px);
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  10% {
+    -webkit-transform: translateY(-30px);
+            transform: translateY(-30px);
+  }
+  20% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  30% {
+    -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+  }
+  40% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  50% {
+    -webkit-transform: translateY(-20px);
+            transform: translateY(-20px);
+  }
+  60% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  70% {
+    -webkit-transform: translateY(-15px);
+            transform: translateY(-15px);
+  }
+  80% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  90% {
+    -webkit-transform: translateY(-15px);
+            transform: translateY(-15px);
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
   }
 }
 
@@ -580,5 +789,11 @@ footer .container ul li a i {
 .brightness_plus {
   -webkit-filter: brightness(110%) !important;
           filter: brightness(110%) !important;
+}
+
+.animation_center_visible {
+  -webkit-animation: center_visible 2s;
+          animation: center_visible 2s;
+  z-index: 5;
 }
 /*# sourceMappingURL=style.css.map */

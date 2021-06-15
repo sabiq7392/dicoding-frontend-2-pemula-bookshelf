@@ -3,18 +3,16 @@ let STORAGE = [];
 
 function isStorageExist(){
     if(typeof(Storage) === undefined){
-        alert("Browser kamu tidak mendukung local storage");
+        alert("Your browser doesn't support Local Storage, try another browser such Mozilla Firefox or Google Chrome or update your browser");
         return false;
     } 
     return true;
 }
 
-function saveDataToStorage(){
-    let convertToString = JSON.stringify(STORAGE);
-    localStorage.setItem("book", convertToString);
-}
+function updateDataToStorage(){
+    // Data/Value dalam array STORAGE akan diubah menjadi string dan dimasukkan ke dalam
+    // WEB STORAGE
 
-function removeDataFromStorage() {
     let convertToString = JSON.stringify(STORAGE);
     localStorage.setItem("book", convertToString);
 }
