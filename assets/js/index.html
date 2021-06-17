@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bookshelf Apps</title>
+    <link rel="stylesheet" href="assets/css/media_quaries.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="head_bar">
+    <div class="container">
+        <a href="index.html" class="logo_brand"><img src="assets/img/Logo.svg" alt="Logo"></a>
+        <section class="search_section" id="searchSection">
+            <form id="searchBook" action="#">
+                <input id="searchBookTitle" type="text" placeholder="Search Book Title...">
+                <button id="searchSubmit" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </section>
+    </div>
+</header>
+<main>
+    <section class="book_shelf">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FF6E74" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+            </svg> 
+            <span>Incomplete Shelf</span>
+        </h2>
+        <ul id="linkIncompleteWrapper" class="incomplete_link_wrapper">
+            <li><a href="#" id="linkShowAllIncompleteBookShelf" >Show All</a></li>
+            <li><a href="#" id="linkImportantIncompleteBookShelf">Important!</a></li>
+            <li><a href="#" id="linkMediumIncompleteBookShelf">Medium Priority</a></li>
+            <li><a href="#" id="linkLowIncompleteBookShelf">Low Priority</a></li>
+        </ul>
+        <div id="incompleteBookshelfListImportant" class="book_list d-grid-opacity">
+
+
+
+        </div>
+        <div id="incompleteBookshelfListMedium" class="book_list">
+
+
+
+        </div>
+        <div id="incompleteBookshelfListLow" class="book_list">
+
+
+
+        </div>
+    </section>
+    <section class="book_shelf">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#199D5E" class="bi bi-check-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+            </svg>
+            <span>Complete Shelf</span> 
+        </h2>
+        <div id="completeBookshelfList" class="book_list d-grid-opacity">
+
+
+
+        </div>
+    </section>  
+    <div id="overlay" class="overlay d-none">
+        <section class="input_section" id="inputSection">
+            <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#08D9D6" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+                <span>Add New Book</span>
+            </h2>
+            <form id="inputBook" action="#">
+                <div class="input">
+                    <label for="inputBookTitle">Title</label>
+                    <input id="inputBookTitle" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="inputBookAuthor">Author</label>
+                    <input id="inputBookAuthor" type="text" required>
+                </div>
+                <div class="input">
+                    <label for="inputBookYear">Year</label>
+                    <input id="inputBookYear" type="number" required>
+                </div>
+                <div class="input_priority input_inline">
+                    <h3>Choose Priority:</h3>
+                    <div class="input_priority_wrapper">
+                        <div>
+                            <label for="inputImportant">Important</label>
+                            <input id="inputImportant" name="inputPriority" type="radio" value="important">
+                        </div>
+                        <div>
+                            <label for="inputMiddlePriority">Medium</label>
+                            <input id="inputMiddlePriority" name="inputPriority" type="radio" value="middle">
+                        </div>
+                        <div>
+                            <label for="inputLowPriority">Low</label>
+                            <input id="inputLowPriority" name="inputPriority" type="radio" value="low">
+                        </div>
+                    </div>
+                </div>  
+                <div class="input_inline">
+                    <label for="inputBookIsComplete"><i class="bi bi-question-circle"></i> Finished</label>
+                    <input id="inputBookIsComplete" type="checkbox">
+                </div>  
+
+                <button id="bookSubmit" type="submit">Put on the <span id="textButtonCompleteIncomplete">shelf unfinished</span></button>
+            </form>
+        </section>  
+    </div>
+    <aside>
+        <div class="add_book" id="asideAddBook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#1B262C" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+            </svg>
+            <span>Add New Book</span>
+        </div>
+    </aside>
+</main>
+
+<refresh_submit id="refreshSubmit" title="Refresh">
+    <div><i class="bi bi-arrow-repeat"></i></div>
+</refresh_submit>
+
+<custom_dialog id="customDialog">
+    <div><p id="customDialogText"></p></div>
+</custom_dialog>
+
+<are_you_sure id="areYouSure">
+    <div>
+        <div><p id="areYouSureText"></p></div>
+        <div class="button_wrapper">
+            <button id="buttonYesDelete">Ya</button>
+            <button id="buttonCancelDelete">Cancel</button>
+        </div>
+    </div>
+</are_you_sure>
+
+<button id="reset" class="reset">Reset</button>
+<footer>
+    <div class="container">
+        <small>Made By Sabiq Mame</small>
+        <ul>
+            <li><a href="https://www.instagram.com/ssabiqmame/"><i class="bi bi-instagram"></i></a></li>
+            <li><a href="https://github.com/sabiq7392"><i class="bi bi-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/sabiq-muhammad-6b314a210/"><i class="bi bi-linkedin"></i></a></li>
+        </ul>
+    </div>
+</footer>
+
+
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/makeBook.js"></script>
+    <script src="assets/js/dom.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
