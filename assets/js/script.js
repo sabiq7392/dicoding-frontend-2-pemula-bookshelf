@@ -1,17 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
+    showAllShelf();
 
     document.getElementById("inputImportant").checked = true;
+
     inputBookIsComplete.checked = false;
 
-
-    
     const formInputBook = document.getElementById("inputBook");
     formInputBook.addEventListener("submit", (event) => {
-
         event.preventDefault();
-        makeBook();
+        makeBook(+new Date(), inputBookTitle.value, inputBookAuthor.value, inputBookYear.value);
         updateDataToStorage();
-
     });
     
     if (isStorageExist()){
@@ -21,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (theData !== null) {
             STORAGE = theData; 
-        }
+            // semua yang ada di dalama STORAGE dimasukkan ke dalam WEB STORAGE
+        } 
 
         for (myStorage of STORAGE) {
             const savedBook = {
@@ -44,5 +44,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
+    buttonReset();
 });

@@ -1,9 +1,16 @@
-$background: #f5f5f5
-$font: #1B262C
+$background: #f0f0f0
+$font: #222
 $font-white: #f5f5f5
 $input: #fff
 $primary-color: #F0D9DA
-$very-light: #08D9D6
+$blueSky: #08D9D6
+$red-light: #ffaaa7
+$red-depth: #FF6E74
+$orang-light: #FFD3B4
+$orange-depth: #ecbe85
+$green-light:  	 hsl(93, 53%, 80%)
+$green-medium: #98DDCA
+$green-depth: #55B688
 $border: 1px solid rgba(#1B262C, 0.1)
 $shadow-center: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25))
 $shadow-bottom: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.15))
@@ -50,11 +57,10 @@ input, button
     color: $font
 
 input:focus 
-    outline: 1px solid $very-light
-    filter: $shadow-center
+    outline: none
 
 .head_bar 
-    background-color: white
+    background-color: #fcfcfc        
     filter: $shadow-center
     position: sticky
     top: 0
@@ -99,13 +105,15 @@ input:focus
             border-top-right-radius: $disabled-0
             border-bottom-right-radius: $disabled-0
             background-color: #f8f8f8
+            border: 1px solid #ececee
 
         button 
             display: grid
             place-items: center
-            background-color: #f5f5f5
+            background-color: #ececec
             cursor: pointer
             padding: 8px
+            border: $disabled-none
             border-top-left-radius: $disabled-0
             border-bottom-left-radius: $disabled-0
             &:hover
@@ -116,6 +124,185 @@ main
     width: 100%
     margin: 60px auto
     padding: 16px
+
+.book_shelf 
+    padding: 16px
+    border-radius: $border-radius
+    display: grid
+    grid-gap: 20px
+    &:nth-child(2)
+        margin-top: 30px
+        
+    h2 
+        grid-gap: $gap-2
+        color: $font
+
+    .incomplete_link_wrapper 
+        margin: 30px  0
+        display: flex
+        grid-gap: 20px
+        list-style: none
+        li:hover a
+            text-decoration: underline
+
+        li:nth-child(1) 
+            &:hover a
+                color: $blueSky
+                
+            .active
+                color: $blueSky
+
+        li:nth-child(2) 
+            &:hover a
+                color: $red-depth
+                
+            .active
+                color: $red-depth
+
+        li:nth-child(3) 
+            &:hover a
+                color: $orange-depth
+
+            .active
+                color: $orange-depth
+            
+        li:nth-child(4) 
+            &:hover a
+                color: $green-depth
+                
+            .active
+                color: $green-depth
+                
+        a
+            font-weight: bold
+            font-size: 18px 
+            text-decoration: none
+            color: rgba($font, 0.4)
+            transition: $transition-fast
+        
+        .active
+            text-decoration: underline
+    
+    #incompleteBookshelfListImportant
+        border-left: 10px solid $red-light
+
+    #incompleteBookshelfListMedium
+        border-left: 10px solid $orang-light
+
+    #incompleteBookshelfListLow
+        border-left: 10px solid $green-light
+
+    #completeBookshelfList
+        border-left: 10px solid #ececec
+
+    .book_list 
+        display: none
+        min-height: 194px
+        padding: 16px
+        border-radius: $border-radius
+        grid-template-columns: 1fr 1fr 1fr 1fr
+        grid-gap: $gap-2
+        background-color: #fcfcfc        
+        position: relative
+        &:hover 
+            border-left: 10px solid #fcfcfc  !important
+            .pop_title
+                left: -28px
+            
+        .pop_title
+            display: grid
+            position: absolute
+            left: 100px
+            top: 0
+            width: 194px
+            padding: 16px
+            height: auto
+            background-color: #fcfcfc
+            top: 50%
+            transform: translate(-50%, -50%) rotate(-90deg)
+            transition: 400ms
+            border-radius: $border-radius
+            z-index: -1
+            text-align: center
+        .pop_title_important
+            color: $red-light
+            border-top: 10px solid $red-light
+        .pop_title_medium
+            color: $orang-light
+            border-top: 10px solid $orang-light
+        .pop_title_low        
+            color: $green-light
+            border-top: 10px solid $green-light
+        .pop_title_complete 
+            color: #dadada
+            border-top: 10px solid #dadada
+
+        .book_item 
+            min-width: 253.5px
+            padding: 8px 16px 16px 16px
+            border-radius: $border-radius
+            transition: $transition-fast
+            filter: $shadow-center
+                
+            &:hover
+                transform: translateY(-5px)
+
+            h3, p 
+                margin: 8px 0
+                color: $font
+
+            .action 
+                display: grid
+                grid-template-columns: auto auto
+                grid-gap: 5px
+                button 
+                    padding: 10px 20px
+                    border-radius: $border-radius
+                    cursor: pointer
+
+                .finish_or_cancel, .delete
+                    transition: $transition-fast
+                    font-weight: 500
+
+                .finish_or_cancel
+                    color: $font
+                    background: $green-medium
+
+                .delete
+                    border: 1px solid $font
+                    color: $font
+                    background: $background-transparent
+                
+                .finish_or_cancel:hover, 
+                    filter: $brightness
+
+                .delete:hover
+                    background: $red-depth 
+                    border: $disabled-0
+
+        .important_priority
+            background: $red-light!important
+        
+        .medium_priority
+            background: $orang-light!important
+
+        .low_priority
+            background: $green-light!important
+
+        .completed
+            background: #ececec!important
+
+.overlay
+    background-color: rgba(0,0,0,0.5)
+    position: fixed
+    top: 50%
+    display: none
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 100%
+    height: 100%
+    z-index: 0
+    opacity: 0
 
 .input_section 
     max-width: 400px
@@ -143,9 +330,11 @@ main
     form
         input
             margin: 8px 0
+            &:focus
+                outline: 1px solid $blueSky
         
         button 
-            background-color: $very-light
+            background-color: $blueSky
             color: $font
             border: 0
             border-radius: $border-radius
@@ -206,130 +395,6 @@ main
                         transform: translateY(-2px)
                         font-weight: 500
                             
-.book_shelf 
-    padding: 16px
-    border-radius: $border-radius
-    display: grid
-    grid-gap: $gap-2
-    &:nth-child(2)
-        margin-top: 30px
-        
-    h2 
-        grid-gap: $gap-2
-        color: $font
-
-    .unfinished_link 
-        margin: 30px  0
-        display: flex
-        grid-gap: 20px
-        list-style: none
-        li:hover a
-            text-decoration: underline
-
-        li:nth-child(1) 
-            &:hover a
-                color: #FF6E74
-                
-            .active
-                color: #FF6E74
-
-        li:nth-child(2) 
-            &:hover a
-                color: #ecbe85
-
-            .active
-                color: #ecbe85
-            
-        li:nth-child(3) 
-            &:hover a
-                color: #55B688
-                
-            .active
-                color: #55B688
-                
-        a
-            font-weight: bold
-            font-size: 18px 
-            text-decoration: none
-            color: rgba($font, 0.4)
-            transition: $transition-fast
-        
-        .active
-            text-decoration: underline
-        
-
-    .book_list 
-        padding: 16px
-        border-radius: $border-radius
-        display: grid
-        grid-template-columns: 1fr 1fr 1fr 1fr
-        grid-gap: $gap-2
-        background: white
-        &:nth-child(2)
-            margin-top: 30px 
-            
-        .book_item 
-            min-width: 253.5px
-            padding: 8px 16px 16px 16px
-            border-radius: $border-radius
-            transition: $transition-fast
-            filter: $shadow-center
-                
-            &:hover
-                filter: $shadow-center brightness(125%)
-                transform: translateY(-5px)
-
-            h3, p 
-                margin: 8px 0
-                color: $font
-
-            .action 
-                display: grid
-                grid-template-columns: auto auto
-                grid-gap: 5px
-                button 
-                    padding: 10px 20px
-                    border-radius: $border-radius
-                    cursor: pointer
-
-                .finish_or_cancel, .delete
-                    transition: $transition-fast
-                    font-weight: 500
-
-                .finish_or_cancel
-                    color: $font
-                    background: #4bd494
-
-                .delete
-                    border: 1px solid $font
-                    color: $font
-                    background: $background-transparent
-                
-                .finish_or_cancel:hover, .delete:hover
-                    filter: $shadow-bottom
-                
-        .background-unfinished
-            background: #FFBDC0
-        
-        // .background-unfinished-2
-        //     background: #FFBDC0
-        
-        .important_priority
-            background: #FFBDC0
-        
-        .medium_priority
-            background: #ecbe85
-
-        .low_priority
-            background: #55B688
-            filter: brightness(115%)
-
-        .background-finished
-            background: #ececec
-
-        .background-finished-2
-            background: #E0E0E0
-
 aside
     display: grid
     grid-gap: 30px
@@ -339,7 +404,7 @@ aside
     z-index: 1
     .add_book
         border-radius: $border-radius
-        background: $very-light
+        background: $blueSky
         display: flex
         justify-content: center
         align-items: center
@@ -366,17 +431,37 @@ aside
             opacity: 1
             z-index: 1
 
-refresh_submit
+.reset_button 
+    padding: 16px
+    button 
+        width: 100px
+        height: 42px
+        transition: $transition-fast
+        cursor: pointer
+        &:hover
+            filter: $shadow-center
+
+refresh_submit, custom_dialog, are_you_sure
     display: none
     position: fixed
+
+refresh_submit, are_you_sure
+    filter: $shadow-center
+    background: white
+
+custom_dialog, are_you_sure
+    place-items: center
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    
+refresh_submit
     top: 85px
     left: 50%
     z-index: 5 !important
     width: 50px
     height: 50px
-    background: white
     border-radius: $border-circle
-    filter: $shadow-center
     animation: from_top 1s
     transition: 1s
     cursor: pointer
@@ -384,23 +469,40 @@ refresh_submit
         font-size: 20px
 
 custom_dialog
-    display: none
-    place-items: center
     width: 100vw
     height: 100px
     background-color: rgba(0,0,0,0.5)
-    position: fixed
-    top: 50%
-    left: 50%
-    opacity: 0
-    z-index: 0
-    transform: translate(-50%, -50%)
     color: #f0f0f0
     font-size: 30px
     font-weight: bold
-    transition: 2s
     cursor: context-menu
     
+are_you_sure
+    padding: 32px
+    width: 300px
+    height: 200px
+    font-size: 18px
+    border-radius: $border-radius
+    .button_wrapper
+        display: grid
+        grid-template-columns: 1fr 1fr
+        grid-gap: $gap-2
+        margin-top: 15px
+        
+    button
+        height: 32px
+        cursor: pointer
+        transition: $transition-fast
+        &:nth-child(1)
+            background: #4bd494
+        &:nth-child(1):hover
+            filter: $brightness 
+
+        &:nth-child(2)
+            background: #FF6E74
+        &:nth-child(2):hover
+            filter: $brightness 
+
 footer
     display: flex
     z-index: 0
@@ -496,35 +598,26 @@ footer
     
 // =========== Class Spawn
 
-.overlay
-    background-color: rgba(0,0,0,0.5)
-    position: fixed
-    top: 50%
-    display: none
-    left: 50%
-    transform: translate(-50%, -50%)
-    width: 100%
-    height: 100%
-    z-index: -1
-    opacity: 0
-
-.d-grid
-    display: grid
-    place-items: center
-    z-index: 0
+.d-grid-opacity
+    display: grid!important
     opacity: 1
 
+.d-grid-center
+    display: grid!important
+    place-items: center
+    opacity: 1
+    
 .visible
     z-index: 2
     opacity: 1
 
 .d-none
-    display: none
+    display: none!important
 
 .brightness_plus
     filter: brightness(110%)!important
 
 .animation_center_visible
-    animation: center_visible 2s
+    display: grid
+    animation: center_visible 1s
     z-index: 5
-
