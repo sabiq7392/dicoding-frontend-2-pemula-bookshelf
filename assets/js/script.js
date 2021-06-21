@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     showAllShelf();
+    buttonReset();
 
     document.getElementById("inputImportant").checked = true;
 
@@ -44,5 +45,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    buttonReset();
+
 });
